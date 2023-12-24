@@ -1,4 +1,4 @@
-import styles from '../mestyles.module.css';
+import styles from '../MeStyle.module.css';
 
 export function ProfileSkeleton() {
     return (

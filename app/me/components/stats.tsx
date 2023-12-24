@@ -1,10 +1,10 @@
 "use client";
 import {useRouter} from "next/navigation";
 import {useState, useEffect, Suspense} from "react";
-import styles from '../mestyles.module.css';
+import styles from '../MeStyle.module.css';
 import {SubFieldSkeleton} from "./skeletons";
-import {getSubscriptionData, getPanelUrl} from "./getSubscriptionData";
-import Logout from "./logout";
+import {getSubscriptionData, getPanelUrl, logout} from "./serverUtils";
+
 
 // @ts-ignore
 export default function ProfileStats({discordUser}) {
@@ -43,7 +43,7 @@ export default function ProfileStats({discordUser}) {
                 <div className={styles.profileValue} style={{
                     fontSize: "1.5rem"
                 }} onClick={() => {
-                    Logout().then((completed: boolean) => {
+                    logout().then((completed: boolean) => {
                         if (completed) {
                             router.push("/");
                         }

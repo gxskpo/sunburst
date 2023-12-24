@@ -1,6 +1,6 @@
 'use client';
 import {redirect} from "next/navigation";
-import styles from './flogin.module.css'
+import styles from '../LoginForm.module.css'
 import getOauthURL from "./oauth_url";
 import {useRouter} from "next/navigation";
 
