@@ -311,3 +311,96 @@
     font-weight: 400;
     text-align: center;
 }
+
+@media (max-width: 768px) {
+    .layout{
+        position: absolute;
+        height: 100%;
+        min-width: 100%;
+        margin: 0 auto;
+
+    }
+
+
+
+    .profileHeader{
+        display: block;
+    }
+
+    .profileAccount{
+        display: block;
+        text-align: center;
+    }
+
+    .profilePictureContainer{
+        margin: 0 auto;
+    }
+
+    .profileButton{
+        margin-top: 40px;
+        width: 70vw;
+    }
+    .profile{
+        margin-top: 30vh;
+        width: 100%;
+        /* make button to go below */
+        border-radius: 25px 25px 0 0;
+        height: 70vh;
+        display: block;
+    }
+
+    .profileStats{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .profileStat {
+        animation: slideUp ease-in-out 350ms forwards;
+        margin-top: 20px;
+        display: block;
+        width: 80vw;
+    }
+
+    .profileStat:nth-child(1) {
+        border: 1px solid #e9e9e9;
+        border-radius: 25px;
+    }
+
+
+    .profileStat:nth-child(2) {
+        border: 1px solid #e9e9e9;
+        border-radius: 25px;
+    }
+
+    .profileStat:nth-child(1):hover {
+        border:none;
+        border-radius: 25px;
+    }
+
+    .profileStat:nth-child(2):hover {
+        border:none;
+        border-radius: 25px;
+    }
+
+    .profileStat:nth-child(1) > .profileIcon{
+        display: inline-block;
+    }
+
+    .profileStat:nth-child(2) > .profileIcon{
+        display: inline-block;
+    }
+
+    .profileStat:nth-child(1) > .profileValue{
+        display: inline-block;
+    }
+
+    .profileStat:nth-child(2) > .profileValue{
+        display: inline-block;
+    }
+
+    .profileStat:nth-child(1) > .profileKey{
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+}

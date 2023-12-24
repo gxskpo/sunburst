@@ -189,3 +189,20 @@
     text-shadow: var(--hover-shadow);
 }
 
+@screen md {
+    .layout {
+        @apply mx-auto max-w-screen-md;
+    }
+}
+
+@screen lg {
+    .layout {
+        @apply max-w-screen-lg;
+    }
+}
+
+@screen xl {
+    .layout {
+        @apply max-w-screen-xl;
+    }
+}
