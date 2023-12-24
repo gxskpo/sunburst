@@ -6,12 +6,13 @@ export default async function exhangeToken(code: string): Promise<boolean> {
     const id: string = process.env.CLIENT_ID!;
     const secret: string = process.env.CLIENT_SECRET!;
     const isProd: boolean = process.env.ENVRT === 'production';
+    const domain = process.env.DOMAIN!;
     let redirect_url;
 
     if (!isProd) {
-        redirect_url = 'http://' + process.env.DOMAIN + '/auth/callback';
+        redirect_url = 'http://' + domain + '/auth/callback';
     } else {
-        redirect_url = 'https://' + process.env.DOMAIN + '/auth/callback';
+        redirect_url = 'https://' + domain + '/auth/callback';
     }
     const body = {
         'client_id': id,

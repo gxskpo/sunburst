@@ -4,6 +4,9 @@ import {redirect} from "next/navigation";
 
 export default async function Logout(): Promise<boolean> {
     const refresh_token = cookies().get("refresh_token");
+    const clientId = process.env.CLIENT_ID;
+    const clientSecret = process.env.CLIENT_SECRET
+
     if (!refresh_token) {
         cookies().delete("access_token");
         cookies().delete("refresh_token");
@@ -11,8 +14,8 @@ export default async function Logout(): Promise<boolean> {
     }
 
     const body = {
-        'client_id': process.env.CLIENT_ID,
-        'client_secret': process.env.CLIENT_SECRET,
+        'client_id': clientId,
+        'client_secret': clientSecret,
         'token': refresh_token.value,
         'token_type_hint': 'refresh_token',
     };
