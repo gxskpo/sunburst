@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap');
 
-.topContainer{
+.topContainer {
     /* Items must be at top right, small margin to right */
     @apply absolute top-0 right-0 mr-4 mt-4;
 }
@@ -17,6 +17,7 @@
     box-shadow: var(--small-default-shadow);
     transition-duration: .23s
 }
+
 .topBubbleButton > p {
     /* inline, centered, no margin */
     @apply inline-block;
@@ -26,6 +27,7 @@
 .topBubbleButton:hover {
     box-shadow: var(--sink-shadow);
 }
+
 .layout {
     align-items: center;
     display: flex;
@@ -148,7 +150,6 @@
 }
 
 
-
 .profileHeader {
     display: flex;
     margin-bottom: 20px;
@@ -179,7 +180,7 @@
     padding-left: calc(var(--profile-picture-size) + 10px);
 }
 
-.profileEdit{
+.profileEdit {
     flex: none;
     margin-left: 30px;
     width: 140px;
@@ -204,7 +205,7 @@
     color: var(--white);
 }
 
-.profileStats{
+.profileStats {
     display: flex;
 }
 
@@ -228,12 +229,12 @@
     border-right: none;
 }
 
-.profileStat:hover > .profileValue{
+.profileStat:hover > .profileValue {
     color: #ffffff;
     cursor: pointer;
 }
 
-.profileStat:hover > .profileKey{
+.profileStat:hover > .profileKey {
     color: #ffffff;
     cursor: pointer;
 }
@@ -258,7 +259,8 @@
     color: #ffffff;
     cursor: pointer;
 }
-.profileStat:nth-child(1):hover > .profileIcon{
+
+.profileStat:nth-child(1):hover > .profileIcon {
     color: #ffffff;
     cursor: pointer;
 }
@@ -270,7 +272,7 @@
     cursor: pointer;
 }
 
-.profileStat:nth-child(2):hover > .profileIcon{
+.profileStat:nth-child(2):hover > .profileIcon {
     color: #ffffff;
     cursor: pointer;
 }
@@ -296,7 +298,7 @@
 }
 
 
-.profileValue{
+.profileValue {
     color: var(--black);
     font-family: var(--base-font);
     font-size: 22px;
@@ -304,7 +306,7 @@
     text-align: center;
 }
 
-.profileKey{
+.profileKey {
     color: var(--black);
     font-family: var(--base-font);
     font-size: 13px;
@@ -313,7 +315,7 @@
 }
 
 @media (max-width: 768px) {
-    .layout{
+    .layout {
         position: absolute;
         height: 100%;
         min-width: 100%;
@@ -322,25 +324,25 @@
     }
 
 
-
-    .profileHeader{
+    .profileHeader {
         display: block;
     }
 
-    .profileAccount{
+    .profileAccount {
         display: block;
         text-align: center;
     }
 
-    .profilePictureContainer{
+    .profilePictureContainer {
         margin: 0 auto;
     }
 
-    .profileButton{
+    .profileButton {
         margin-top: 40px;
         width: 70vw;
     }
-    .profile{
+
+    .profile {
         margin-top: 30vh;
         width: 100%;
         /* make button to go below */
@@ -349,7 +351,7 @@
         display: block;
     }
 
-    .profileStats{
+    .profileStats {
         display: flex;
         flex-direction: column;
     }
@@ -373,32 +375,32 @@
     }
 
     .profileStat:nth-child(1):hover {
-        border:none;
+        border: none;
         border-radius: 25px;
     }
 
     .profileStat:nth-child(2):hover {
-        border:none;
+        border: none;
         border-radius: 25px;
     }
 
-    .profileStat:nth-child(1) > .profileIcon{
+    .profileStat:nth-child(1) > .profileIcon {
         display: inline-block;
     }
 
-    .profileStat:nth-child(2) > .profileIcon{
+    .profileStat:nth-child(2) > .profileIcon {
         display: inline-block;
     }
 
-    .profileStat:nth-child(1) > .profileValue{
+    .profileStat:nth-child(1) > .profileValue {
         display: inline-block;
     }
 
-    .profileStat:nth-child(2) > .profileValue{
+    .profileStat:nth-child(2) > .profileValue {
         display: inline-block;
     }
 
-    .profileStat:nth-child(1) > .profileKey{
+    .profileStat:nth-child(1) > .profileKey {
         display: inline-block;
         margin-left: 10px;
     }

@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# <sub><sup>The new</sub></sup> Fembot.online
 
-## Getting Started
+## What is this?
 
-First, run the development server:
+This repository is the source code for the new Fembot.online website. Made using Next.js 14, the new app router,
+TypeScript, and Tailwind CSS.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Site Structure
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `/` - The homepage
+- `/me` - The user profile page
+- `/auth/login` - The login page
+- `/auth/register` - The register page
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies Used
+- [Next.js](https://nextjs.org/) - The React framework used
+- [TypeScript](https://www.typescriptlang.org/) - The language used
+- [Tailwind CSS](https://tailwindcss.com/) - The CSS framework used
+- [Vercel](https://vercel.com/) - The hosting platform used
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Live Demo
+Live demo can be found at [beta.fembot.online](https://beta.fembot.online/)
+Stripe sandbox keys are used for payments, don't enter real card details.
 
-## Learn More
+## Licensing
 
-To learn more about Next.js, take a look at the following resources:
+This project is licensed under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license.
+[![CC BY-NC-SA 4.0](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### What you can do
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Share — copy and redistribute the material in any medium or format
+- Adapt — remix, transform, and build upon the material
 
-## Deploy on Vercel
+### Under the following terms
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
+- NonCommercial — You may not use the material for commercial purposes.
+- ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the
+  same license as the original.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### **Some assets may be licensed under different license*
+
+## Contributing
+
+Want to contribute? Great! You can do so by making a pull request. Please make sure to follow the code style and
+conventions used in this project.
