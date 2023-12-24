@@ -1,19 +1,21 @@
 "use client";
 import {useState, useEffect, Suspense} from "react";
-import getUserData from "./getUserData";
 import ProfileStats from "./stats";
-import styles from '../mestyles.module.css';
+import styles from '../MeStyle.module.css';
 import {ProfileSkeleton, UsernameSkeleton} from "./skeletons";
-import Logout from "@/app/me/components/logout";
+import {logout, getUserData} from './serverUtils'
+import {useRouter} from "next/navigation";
 
 // @ts-ignore
-export default function Profile({router}) {
+export default function Profile() {
+    const router = useRouter();
     const [user, setUser]: any = useState(null);
+
 
     useEffect(() => {
         getUserData().then((data) => {
             if (!data) {
-                return Logout().then((completed: boolean) => {
+                return logout().then((completed: boolean) => {
                     router.push("/auth/login");
                 });
             }
@@ -22,23 +24,21 @@ export default function Profile({router}) {
         });
     }, []);
 
+
     return (
         <div className={styles.profile}>
-            <Suspense fallback={<ProfileSkeleton/>}>
-                <div className={styles.profilePictureContainer}>
-                    {user && user.avatar &&
-                        <img
-                            src={user.avatar}
-                            alt="Profile Picture"
-                            className={styles.profilePictureImg}
-                        /> || <ProfileSkeleton/>
-                    }
-                </div>
-            </Suspense>
+            <div className={styles.profilePictureContainer}>
+                {user && user.avatar && <img
+                    src={user.avatar}
+                    alt="Profile Picture"
+                    className={styles.profilePictureImg}
+                /> || <ProfileSkeleton/>
+                }
+            </div>
             <div className={styles.profileHeader}>
                 <div className={styles.profileAccount}>
                     {user && user.username &&
-                        <h4 className={styles.profileUsername}>{user.username}</h4>
+                        <h4 className={styles.profileUsername}>{user.global_name}</h4>
                         || <UsernameSkeleton/>
                     }
                 </div>

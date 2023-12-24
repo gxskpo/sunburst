@@ -1,0 +1,191 @@
+.landingContainer{
+    /* size: complete page */
+    @apply min-h-screen flex items-center justify-center;
+    background-color: var(--grey);
+}
+
+.topContainer{
+    /* Items must be at top right, small margin to right */
+    @apply absolute top-0 right-0 mr-4 mt-4;
+}
+
+@keyframes popUp {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.topBubbleButton {
+    /* inline-block, rounded, background gray no shadow */
+    @apply justify-center w-auto h-12;
+    margin: 0 5px;
+    /* padding, small padding from top, to avoid uncentered image & text */
+    @apply px-4 py-1;
+    color: var(--black);
+    border-radius: 10px;
+    background-color: var(--white);
+    box-shadow: var(--small-default-shadow);
+    transition-duration: .23s;
+    animation: popUp ease-in-out 350ms;
+}
+
+.topBubbleButton > img  {
+    /* size: 20px, inline, rounded full, centered */
+    @apply inline-block w-6 h-6 rounded-full;
+    margin: 0 5px;
+}
+
+.topBubbleButton > p {
+    /* inline, centered, no margin */
+    @apply inline-block;
+    margin: 0 5px;
+}
+
+
+@keyframes skeleton {
+    0% {
+        background-position: calc(100px + 100%) 0;
+    }
+    10% {
+        background-position: calc(200px + 100%) 0;
+    }
+    20% {
+        background-position: calc(300px + 100%) 0;
+    }
+    30% {
+        background-position: calc(400px + 100%) 0;
+    }
+    40% {
+        background-position: calc(500px + 100%) 0;
+    }
+    50% {
+        background-position: calc(600px + 100%) 0;
+    }
+    60% {
+        background-position: calc(700px + 100%) 0;
+    }
+    70% {
+        background-position: calc(800px + 100%) 0;
+    }
+    80% {
+        background-position: calc(900px + 100%) 0;
+    }
+    90% {
+        background-position: calc(1000px + 100%) 0;
+    }
+    100% {
+        background-position: calc(1100px + 100%) 0;
+    }
+}
+
+.topBubbleButton > .skeleton {
+    /* inline, centered, no margin */
+    @apply inline-block;
+    margin: 0 5px;
+    background: linear-gradient(90deg, var(--grey) 0px, var(--white) 50%, var(--grey) 100%);
+    border-radius: 10px;
+    width: 70px;
+    height: 20px;
+    background-size: 200px 100%;
+    animation: skeleton 3.1s ease-in-out infinite;
+}
+
+.topBubbleButton:hover {
+    box-shadow: var(--sink-shadow);
+}
+
+.titleContainer {
+    user-select: none;
+    /* Add the shadow to the text */
+    @apply relative z-10;
+}
+
+.title {
+    /* Set background properties to make it fit the text */
+    @apply text-7xl font-bold text-left align-top;
+    background: -webkit-linear-gradient(to right, #78e7b6, #949bde, #d28fe3);
+    color: transparent;
+    background: linear-gradient(to right, #78e7b6, #949bde, #d28fe3);
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    /* Add text-shadow property */
+    text-shadow: var(--hover-shadow);
+}
+
+.description {
+    @apply text-2xl font-bold text-left;
+    color: var(--black);
+    text-shadow: var(--default-shadow);
+}
+
+.buttonContainer {
+    /* items must be in one row */
+    @apply flex flex-row;
+}
+
+.landingButton {
+    /* inline-block*/
+    margin: 0 10px;
+    @apply inline-flex items-center justify-center w-48 h-12 rounded-md text-white text-lg font-semibold transition duration-300 mt-4;
+    box-shadow: var(--small-default-shadow);
+}
+
+.landingButton:hover {
+    box-shadow: var(--sink-shadow);
+}
+
+.landingButton > i {
+    margin-right: 5px;
+}
+
+.addDiscord{
+    background-color: #5865F2;
+}
+
+.addDiscord:hover{
+    background-color: #4e5bd1;
+}
+
+.vote{
+    background-color: #f04747;
+}
+
+.vote:hover{
+    background-color: #d13b3b;
+}
+
+.vote:disabled{
+    background-color: #ad7777;
+    cursor: not-allowed;
+}
+
+@keyframes scrollDown {
+    0% {
+        transform: translateY(0);
+    }
+    30% {
+        transform: translateY(10px);
+    }
+    50%{
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.scrollDownIndicator {
+    /* must be centered (it's i) */
+    @apply absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-4;
+    font-size: 2rem;
+    color: var(--black);
+    animation: scrollDown 1.8s ease-in-out infinite;
+    text-shadow: var(--hover-shadow);
+}
+

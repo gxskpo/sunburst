@@ -1,5 +1,5 @@
 'use client';
-import styles from './flogin.module.css'
+import styles from '../LoginForm.module.css'
 import exchangeToken from "./tokenExchange";
 import {useRouter} from "next/navigation";
 import {useSearchParams} from "next/navigation";
@@ -24,8 +24,9 @@ export default function ExchangeToken() {
             if (completed) {
                 router.push("/me")
             }
-        })
-
+        }).catch((err) => {
+            router.push("/auth/login")
+        });
     }, [code])
 
     return (
@@ -33,8 +34,7 @@ export default function ExchangeToken() {
             <div className={styles.loginContainer}>
                 <div className={styles.loginForm}>
                     <h1 className={styles.loginFormTitle}>Por favor espere</h1>
-                    {/*Bolita que rebote*/}
-                    <i className={"fas fa-circle fa-bounce fa-2x " + styles.loginFormButtonIcon}></i>
+                    <i className={"fas fa-circle fa-bounce fa-2x " + styles.loginFormIcon}></i>
                     <p className={styles.loginFormBottomText}>Esto puede tardar unos segundos</p>
                 </div>
             </div>
