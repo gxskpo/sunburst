@@ -2,6 +2,7 @@
 import Profile from "./components/profile";
 import styles from './MeStyle.module.css';
 import {useRouter} from "next/navigation";
+import {NotificationWidget} from "@/app/nfWidget";
 
 
 export default function MePage() {

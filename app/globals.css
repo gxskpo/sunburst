@@ -5,37 +5,130 @@
 @tailwind utilities;
 
 :root .clear {
-  --montserrat: 'Montserrat', sans-serif;
-  --base-font: var(--montserrat);
-  --black: #000000;
-  --blue: #8faae8;
-  --gold: #eab100;
-  --grey: #f9fafb;
-  --pink: #ff86af;
-  --white: #ffffff;
-  --profile-picture-size: 125px;
+    --montserrat: 'Montserrat', sans-serif;
+    --base-font: var(--montserrat);
+    --black: #000000;
+    --blue: #8faae8;
+    --gold: #eab100;
+    --grey: #f9fafb;
+    --pink: #ff86af;
+    --white: #ffffff;
+    --profile-picture-size: 125px;
 }
 
 :root {
-  --montserrat: 'Montserrat', sans-serif;
-  --base-font: var(--montserrat);
-  --black: #ffffff;
-  --blue: #8faae8;;
-  --gold: #eab100; /* Color adaptado para que combine bien con el nuevo blue */
-  --pink: #ff86af;
-  --grey: #1a1a1a; /* Nuevo color de fondo para modo oscuro */
-  --white: #333333; /* Nuevo color para objetos en modo oscuro */
-  --default-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.1);
-  --small-default-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.1);
-  --hover-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(255, 255, 255, 0.1);
-  --sink-shadow:    0px 0px 3px 0px #333333,
-  0px 0px 3px 0px #333333,
-  0px 0px 3px 0px #0001,
-  0px 0px 3px 0px #0001,
-  inset 0px 0px 6px 0px #333333,
-  inset 0px 0px 4px 0px #333333,
-  inset 0px 0px 6px 0px #0003,
-  inset 0px 0px 4px 0px #0001;
-  --text-shadow: 0px 0px 3px #000000;
+    --montserrat: 'Montserrat', sans-serif;
+    --base-font: var(--montserrat);
+    --black: #ffffff;
+    --blue: #8faae8;;
+    --gold: #eab100; /* Color adaptado para que combine bien con el nuevo blue */
+    --pink: #ff86af;
+    --grey: #1a1a1a; /* Nuevo color de fondo para modo oscuro */
+    --white: #333333; /* Nuevo color para objetos en modo oscuro */
+    --default-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.1);
+    --small-default-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.1);
+    --hover-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), -8px -8px 18px rgba(255, 255, 255, 0.1);
+    --sink-shadow: 0px 0px 3px 0px #333333,
+    0px 0px 3px 0px #333333,
+    0px 0px 3px 0px #0001,
+    0px 0px 3px 0px #0001,
+    inset 0px 0px 6px 0px #333333,
+    inset 0px 0px 4px 0px #333333,
+    inset 0px 0px 6px 0px #0003,
+    inset 0px 0px 4px 0px #0001;
+    --text-shadow: 10px 10px 22px rgba(0, 0, 0, 0.4), -10px -10px 22px rgba(255, 255, 255, 0.2);
 }
 
+html {
+    overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent; /* make scrollbar transparent */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.nfw-container {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.nfw-container .nfw-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    background-color: var(--white);
+
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: var(--default-shadow);
+    color: var(--black);
+    border: 1px solid var(--black);
+    transition: all 0.2s ease-in-out;
+}
+
+.nfw-container .nfw-content:hover {
+    box-shadow: var(--hover-shadow);
+}
+
+.nfw-container .nfw-content .nfw-content-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.nfw-container .nfw-content .nfw-content-header > i {
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.nfw-container .nfw-content .nfw-content-header > h3 {
+    display: inline-block;
+}
+
+.nfw-container .nfw-content .nfw-content-body {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.nfw-container .nfw-content .nfw-content-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nfw-container .nfw-content .nfw-content-footer button {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    background-color: var(--pink);
+    box-shadow: var(--default-shadow);
+}
+
+.nfw-container .nfw-content .nfw-content-footer button:hover {
+    box-shadow: var(--sink-shadow);
+}
