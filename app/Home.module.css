@@ -109,8 +109,8 @@
     /* Set background properties to make it fit the text */
     @apply text-7xl font-bold text-left align-top;
     color: transparent;
-    background: linear-gradient(to right, #5d35a4, #2e8daf, #f3da68, #e07218);
-    background: -webkit-linear-gradient(to right, #5d35a4, #2e8daf, #f3da68, #e07218);
+    background: linear-gradient(39deg, #5d35a4, #2e8daf, #f3da68, #e07218);
+    background: -webkit-linear-gradient(39deg, #5d35a4, #2e8daf, #f3da68, #e07218);
     background-clip: text;
     -webkit-background-clip: text;
 
@@ -197,8 +197,8 @@
 }
 
 .whyWeAreBetterTitle {
-    background: linear-gradient(to right, #5d35a4, #2e8daf, #f3da68, #e07218);
-    background: -webkit-linear-gradient(to right, #5d35a4, #2e8daf, #f3da68, #e07218);
+    background: linear-gradient(55deg, #5d35a4, #2e8daf, #f3da68, #e07218);
+    background: -webkit-linear-gradient(55deg, #5d35a4, #2e8daf, #f3da68, #e07218);
     background-clip: text;
     -webkit-background-clip: text;
     @apply text-7xl font-bold text-left align-top;
@@ -231,8 +231,8 @@
 }
 
 .whyWeAreBetterCard > i {
-    background: -webkit-linear-gradient(to right, #949bde, #d28fe3);
-    background: linear-gradient(to right, #949bde, #d28fe3);
+    background: -webkit-linear-gradient(8deg, #949bde, #d28fe3);
+    background: linear-gradient(8deg, #949bde, #d28fe3);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -264,8 +264,8 @@
 }
 
 .moduleListTitle {
-    background: linear-gradient(to right, #5d35a4, #2e8daf, #f3da68, #e07218);
-    background: -webkit-linear-gradient(to right, #5d35a4, #2e8daf, #f3da68, #e07218);
+    background: linear-gradient(22deg, #5d35a4, #2e8daf, #f3da68, #e07218);
+    background: -webkit-linear-gradient(22deg, #5d35a4, #2e8daf, #f3da68, #e07218);
     background-clip: text;
     -webkit-background-clip: text;
     /* text must be at the top center */
@@ -319,8 +319,8 @@
 }
 
 .comparisonTitle {
-    background: linear-gradient(to right, #5d35a4, #2e8daf, #f3da68, #e07218);
-    background: -webkit-linear-gradient(to right, #5d35a4, #2e8daf, #f3da68, #e07218);
+    background: linear-gradient(60deg, #5d35a4, #2e8daf, #f3da68, #e07218);
+    background: -webkit-linear-gradient(60deg, #5d35a4, #2e8daf, #f3da68, #e07218);
     background-clip: text;
     -webkit-background-clip: text;
     /* text must be at the top center */
@@ -340,8 +340,8 @@
 }
 
 .comparisonTableContainer > .comparisonDescription > .fembot {
-    background: linear-gradient(to right, #8a5bde, #2e8daf, #e07218);
-    background: -webkit-linear-gradient(to right, #8a5bde, #2e8daf, #e07218);
+    background: linear-gradient(45deg, #8a5bde, #2e8daf, #e07218);
+    background: -webkit-linear-gradient(45deg, #8a5bde, #2e8daf, #e07218);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
