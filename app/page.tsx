@@ -1,10 +1,10 @@
 "use client";
 import styles from './Home.module.css'
-import {getUserData} from "@/app/me/components/serverUtils";
+import {getUserData} from "./me/components/serverUtils";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
-import {dispatchNotification} from "@/app/nfWidget";
-import ComparisonTable from "@/app/comparisonTable";
+import {dispatchNotification} from "./nfWidget";
+import ComparisonTable from "./comparisonTable";
 
 export default function Home() {
     const [user, setUser] = useState<any>(null)
@@ -32,7 +32,7 @@ export default function Home() {
     }
 
     const goVote = (): void => {
-        const url: string = "https://top.gg/bot/1084596791783194634/vote"
+        // const url: string = "https://top.gg/bot/1084596791783194634/vote"
         // const wind = window.open(url, "_blank")
         // wind?.focus()
         dispatchNotification(
