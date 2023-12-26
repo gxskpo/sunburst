@@ -67,7 +67,7 @@ export default function Home() {
                     }
                 </div>
                 <div className={styles.titleContainer}>
-                    <h1 className={styles.title}>Fembot</h1>
+                    <h1 className={styles.title}>LunaBurst</h1>
                     <p className={styles.description}>Bot de discord completamente en español</p>
                     <span className={styles.buttonContainer}>
                     <button className={styles.landingButton + ' ' + styles.addDiscord} onClick={goAdd}><i
@@ -79,7 +79,7 @@ export default function Home() {
                 <i className={styles.scrollDownIndicator + " fas fa-chevron-down"}/>
             </div>
             <div className={styles.whyWeAreBetterContainer} data-title="¿Por qué Fembot?">
-                <h1 className={styles.whyWeAreBetterTitle}>¿Por qué Fembot?</h1>
+                <h1 className={styles.whyWeAreBetterTitle}>¿Por qué LunaBurst?</h1>
                 <div className={styles.whyWeAreBetterCardsContainer}>
                     <div className={styles.whyWeAreBetterCard}>
                         <i className="fas fa-code"/>
@@ -101,7 +101,7 @@ export default function Home() {
             </div>
             <div className={styles.moduleListContainer} data-title="Módulos">
                 <h1 className={styles.moduleListTitle}>Módulos</h1>
-                <p>Estos son algunos de los módulos que incluye fembot</p>
+                <p>Estos son algunos de los módulos que incluye LunaBurst</p>
                 <div className={styles.moduleList}>
                     <div className={styles.moduleCard} id="mod">
                         <i className="fas fa-user-shield"/>
@@ -133,7 +133,7 @@ export default function Home() {
             <div className={styles.comparisonContainer} data-title="Comparación">
                 <div className={styles.comparisonTableContainer}>
                     <h1 className={styles.comparisonTitle}>¿Aún no estás convencido?</h1>
-                    <div className={styles.comparisonDescription}>Compara a <p className={styles.fembot}>Fembot</p> con
+                    <div className={styles.comparisonDescription}>Compara a <p className={styles.fembot}>LunaBurst</p> con
                         otros bots
                     </div>
                 </div>

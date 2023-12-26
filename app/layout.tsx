@@ -4,7 +4,7 @@ import {SpeedInsights} from "@vercel/speed-insights/next"
 import {NotificationWidget} from "@/app/nfWidget";
 
 export const metadata: Metadata = {
-    title: 'Fembot',
+    title: 'LunaBurst',
 }
 
 export default function RootLayout({

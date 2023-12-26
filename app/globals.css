@@ -37,6 +37,8 @@
     inset 0px 0px 6px 0px #0003,
     inset 0px 0px 4px 0px #0001;
     --text-shadow: 10px 10px 22px rgba(0, 0, 0, 0.4), -10px -10px 22px rgba(255, 255, 255, 0.2);
+    --luna-bg-default: linear-gradient(to right, #473369, #256075, #b09517, #cc8416);
+    --luna-bg-default-webkit: -webkit-linear-gradient(to right, #473369, #256075, #b09517, #cc8416);
 }
 
 html {
