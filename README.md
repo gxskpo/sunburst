@@ -33,22 +33,19 @@ Stripe sandbox keys are used for payments, don't enter real card details.
 
 ## Licensing
 
-This project is licensed under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license.
-[![CC BY-NC-SA 4.0](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+This project is licensed under a [Custom License](LICENSE)
 
-### What you can do
+### Usage Guidelines
+- **Non-Commercial Usage:** You can use, modify, and distribute the software freely for non-commercial purposes.
+- **Commercial Usage:** To use the software for commercial purposes, you need to acquire a commercial license from the Licensor.
 
-- Share — copy and redistribute the material in any medium or format
-- Adapt — remix, transform, and build upon the material
+### Redistribution
+The Software should be redistributed including this License notice, ensuring derivative works are under the same license.
 
-### Under the following terms
+### Warranty & Liability
+The software is provided "as is" without warranty. Furthermore, except in cases of gross negligence or willful misconduct, the Licensor isn't liable for damages or losses.
 
-- Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
-- NonCommercial — You may not use the material for commercial purposes.
-- ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the
-  same license as the original.
-
-### **Some assets may be licensed under different license*
+### **Some assets may be licensed under a different license*
 
 ## Contributing
 
