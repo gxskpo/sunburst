@@ -27,6 +27,18 @@ export async function getSubscriptionData(discordId: string) {
     return "Free";
 }
 
+export async function createCustomer(discordId: string, email: string) {
+    const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY!;
+    const stripe = new Stripe(STRIPE_SECRET_KEY)
+    return await stripe.customers.create({
+        metadata: {
+            discord_id: discordId
+        },
+        email: email
+    })
+
+}
+
 export async function getUserData() {
     const cookie = cookies().get("access_token");
     if (!cookie) return null;
@@ -76,6 +88,27 @@ export async function logout(): Promise<boolean> {
     return true;
 }
 
-export async function getPanelUrl() {
+export async function getPanelUrl(userId: string) {
+    const ENV = process.env.ENVRT;
+    const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY!;
+    const DOMAIN = process.env.DOMAIN!;
+    const stripe = new Stripe(STRIPE_SECRET_KEY)
+    let prefix = ENV === "production" ? "https://" : "http://";
 
+    let session;
+    const me = await stripe.customers.search({
+        query: `metadata['discord_id']:'${userId}'`
+    })
+    if (me.data && me.data.length > 0) {
+        session = await stripe.billingPortal.sessions.create({
+            customer: me.data[0].id, return_url: prefix + DOMAIN + "/me"
+        });
+    } else {
+        const mail = await getUserData();
+        const cus = await createCustomer(userId, mail.email)
+        session = await stripe.billingPortal.sessions.create({
+            customer: cus.id, return_url: prefix + DOMAIN + "/me"
+        });
+    }
+    return session.url;
 }

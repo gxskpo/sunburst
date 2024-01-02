@@ -1,9 +1,10 @@
 "use client";
 import {useRouter} from "next/navigation";
-import {useState, useEffect, Suspense} from "react";
+import {useState, useEffect} from "react";
 import styles from '../MeStyle.module.css';
 import {SubFieldSkeleton} from "./skeletons";
 import {getSubscriptionData, getPanelUrl, logout} from "./serverUtils";
+import {dispatchNotification} from "@/app/nfWidget";
 
 
 // @ts-ignore
@@ -20,8 +21,10 @@ export default function ProfileStats({discordUser}) {
             setSubscriptions(data);
         });
     }, [discordUser]); // Agrega discordUser como dependencia
-    const manageSubs = () => {
-        return null;
+    const manageSubs = async () => {
+        dispatchNotification("fas fa-circle-notch fa-spin", "Redirigiendo", "Estamos redirigiendote a tu panel de suscripciones");
+        const panel_url = await getPanelUrl(discordUser.id);
+        router.push(panel_url);
     }
 
     return (

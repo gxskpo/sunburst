@@ -127,7 +127,8 @@ html {
     border: none;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    background-color: var(--pink);
+    background: linear-gradient(120deg, #5d35a4, #e07218);
+    background: -webkit-linear-gradient(120deg, #5d35a4, #e07218);
     box-shadow: var(--default-shadow);
 }
 

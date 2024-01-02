@@ -6,9 +6,17 @@ import {useRouter} from "next/navigation";
 import {dispatchNotification} from "./nfWidget";
 import ComparisonTable from "./comparisonTable";
 
+
+interface User {
+    id: string,
+    avatar: string,
+    global_name: string
+    [key: string]: any
+}
 export default function Home() {
-    const [user, setUser] = useState<any>(null)
+    const [user, setUser] = useState<User | any>(null)
     const router = useRouter();
+    const APP_ID = process.env.NEXT_PUBLIC_CLIENT_ID
 
     useEffect(() => {
         getUserData().then((data) => {
@@ -26,23 +34,27 @@ export default function Home() {
     }
 
     const goAdd = (): void => {
-        const url: string = "https://discord.com/api/oauth2/authorize?client_id=1084596791783194634&permissions=9897215552535&scope=bot+applications.commands"
-        const wind = window.open(url, "_blank")
-        wind?.focus()
+        const url: string = `https://discord.com/api/oauth2/authorize?client_id=${APP_ID}&permissions=9897215552535&scope=bot+applications.commands`
+        dispatchNotification(
+            'fas fa-wrench',
+            'Aviso',
+            'SunBurst está en fase de desarrollo, podrías encontrar errores'
+        ).then(() => {
+            const wind = window.open(url, "_blank")
+            wind?.focus()
+        })
     }
 
     const goVote = (): void => {
-        // const url: string = "https://top.gg/bot/1084596791783194634/vote"
+        // const url: string = `https://top.gg/bot/${APP_ID}/vote`
         // const wind = window.open(url, "_blank")
         // wind?.focus()
         dispatchNotification(
             'fas fa-bug',
             'Oops!',
-            'Por el momento no puedes votar por Fembot, estamos esperando a que nos aprueben en top.gg ^^'
-        );
+            'Por el momento no puedes votar por SunBurst, estamos esperando a que nos aprueben en top.gg ^^'
+        ).then(() => null);
     }
-    // const aaa = (<i className="fas fa-user"/> Login)
-
 
     return (
         <div className={styles.container}>
@@ -51,7 +63,7 @@ export default function Home() {
                     {user && user !== 'loginRequired' ?
                         <button className={styles.topBubbleButton} onClick={accountButtonAction}>
                             <img
-                                src="https://cdn.discordapp.com/avatars/538821983606145044/8f1f80a0c3d1d37f4dfb009a94fe2ce2.png"
+                                src={user.avatar}
                                 alt="user"/>
                             <p>{user.global_name}</p>
                         </button> : user === 'loginRequired' ?
@@ -133,7 +145,8 @@ export default function Home() {
             <div className={styles.comparisonContainer} data-title="Comparación">
                 <div className={styles.comparisonTableContainer}>
                     <h1 className={styles.comparisonTitle}>¿Aún no estás convencido?</h1>
-                    <div className={styles.comparisonDescription}>Compara a <p className={styles.fembot}>SunBurst</p> con
+                    <div className={styles.comparisonDescription}>Compara a <p
+                        className={styles.fembot}>SunBurst</p> con
                         otros bots
                     </div>
                 </div>
