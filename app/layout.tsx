@@ -20,7 +20,7 @@ export const metadata: Metadata = {
         images: [
             {
                 url: '/sunburst-banner.png',
-                alt: 'Og Image',
+                alt: 'SunBurst',
             },
         ],
     },
