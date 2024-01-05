@@ -42,7 +42,6 @@ export async function getGuilds(includeAll?: boolean): Promise<Guild[]> {
     })
     const guilds = await resp.json();
     let gls: Guild[] = [];
-    console.log(guilds);
     guilds.forEach((guild: Guild) => {
         if ((guild.permissions & 0x0000000000000020) === 0x0000000000000020) {
             gls.push(guild);
