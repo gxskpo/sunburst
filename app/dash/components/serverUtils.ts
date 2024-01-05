@@ -1,6 +1,7 @@
 "use server";
 import {cookies} from "next/headers";
 
+
 export interface Guild {
     id: string;
     name: string;
@@ -20,6 +21,9 @@ export async function checkForBot(guildIds: string[], includeAll: boolean): Prom
             "Authorization": `Bot ${botToken}`
         }
     })
+    if (resp.status !== 200) {
+        throw new Error("Failed to get guilds");
+    }
     const guilds = await resp.json();
     guilds.forEach((guild: Guild) => {
         if (guildIds.includes(guild.id)) {
@@ -40,6 +44,12 @@ export async function getGuilds(includeAll?: boolean): Promise<Guild[]> {
             "Authorization": `Bearer ${cookie.get("access_token")?.value}`
         }
     })
+    if (resp.status !== 200) {
+        if (resp.status === 429) {
+            throw new Error("You are being rate limited");
+        }
+        throw new Error("Failed to get guilds");
+    }
     const guilds = await resp.json();
     let gls: Guild[] = [];
     guilds.forEach((guild: Guild) => {
