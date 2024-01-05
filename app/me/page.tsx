@@ -2,7 +2,6 @@
 import Profile from "./components/profile";
 import styles from './MeStyle.module.css';
 import {useRouter} from "next/navigation";
-import {NotificationWidget} from "@/app/nfWidget";
 
 
 export default function MePage() {
@@ -15,6 +14,7 @@ export default function MePage() {
         <div className={styles.layout}>
             <div className={styles.topContainer}>
                 <button className={styles.topBubbleButton} onClick={goHome}><i className="fas fa-house"/> <p>Inicio</p></button>
+                <button className={styles.topBubbleButton} onClick={() => router.push("/dash")}><i className="fas fa-cog"/> <p>Dashboard</p></button>
             </div>
             <Profile />
         </div>

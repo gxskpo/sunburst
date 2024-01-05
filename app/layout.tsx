@@ -1,6 +1,7 @@
 import type {Metadata} from 'next'
 import './globals.css'
 import {SpeedInsights} from "@vercel/speed-insights/next"
+import {Analytics} from '@vercel/analytics/react';
 import {NotificationWidget} from "@/app/nfWidget";
 import React from "react";
 
@@ -44,6 +45,7 @@ export default function RootLayout({
         <body>
         <NotificationWidget/>
         {children}
+        <Analytics/>
         <SpeedInsights/>
         </body>
         </html>
