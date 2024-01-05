@@ -41,6 +41,7 @@
     --luna-bg-default-webkit: -webkit-linear-gradient(to right, #473369, #256075, #b09517, #cc8416);
 }
 
+
 html {
     overflow: scroll;
 }
@@ -49,6 +50,10 @@ html {
     width: 0;
     height: 0;
     background: transparent; /* make scrollbar transparent */
+}
+
+.useFontAwesome {
+    font-family: 'FontAwesome', sans-serif;
 }
 
 @keyframes fadeIn {
@@ -135,3 +140,6 @@ html {
 .nfw-container .nfw-content .nfw-content-footer button:hover {
     box-shadow: var(--sink-shadow);
 }
+
+
+

@@ -1,5 +1,5 @@
 "use client";
-import {useState, useEffect, Suspense} from "react";
+import {useState, useEffect} from "react";
 import ProfileStats from "./stats";
 import styles from '../MeStyle.module.css';
 import {ProfileSkeleton, UsernameSkeleton} from "./skeletons";
@@ -15,11 +15,10 @@ export default function Profile() {
     useEffect(() => {
         getUserData().then((data) => {
             if (!data) {
-                return logout().then((completed: boolean) => {
+                return logout().then(() => {
                     router.push("/auth/login");
                 });
             }
-            console.log(data);
             setUser(data);
         });
     }, []);

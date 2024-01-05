@@ -21,7 +21,6 @@ export default function Home() {
     useEffect(() => {
         getUserData().then((data) => {
             if (data) {
-                console.log(data);
                 setUser(data)
             } else {
                 setUser('loginRequired')
@@ -74,7 +73,7 @@ export default function Home() {
                             </button>
                     }
                     {user && user !== 'loginRequired' ?
-                        <button className={styles.topBubbleButton}><i className="fas fa-cog"/> <p>Dashboard</p>
+                        <button className={styles.topBubbleButton} onClick={() => router.push("/dash")}><i className="fas fa-cog"/> <p>Dashboard</p>
                         </button> : user === 'loginRequired' ? null : null
                     }
                 </div>

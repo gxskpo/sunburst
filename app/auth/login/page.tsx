@@ -1,5 +1,4 @@
 'use client';
-import {redirect} from "next/navigation";
 import styles from '../LoginForm.module.css'
 import getOauthURL from "./oauth_url";
 import {useRouter} from "next/navigation";
@@ -10,8 +9,8 @@ export default function Login() {
         <>
             <div className={styles.loginContainer}>
                 <div className={styles.loginForm}>
-                    <h1 className={styles.loginFormTitle}>To continue please</h1>
-                    <p className={styles.loginFormText}>Login with Discord</p>
+                    <h1 className={styles.loginFormTitle}>Para continuar</h1>
+                    <p className={styles.loginFormText}>Inicie sesión con Discord</p>
                     <button
                         className={styles.loginFormButton}
                         onClick={async () => {
@@ -20,9 +19,9 @@ export default function Login() {
                                 router.push(redirectUrl)
                             }
                         }}>
-                        <i className={styles.loginFormButtonIcon + " fab fa-discord"}></i> Continue
+                        <i className={styles.loginFormButtonIcon + " fab fa-discord"}></i> Continuar
                     </button>
-                    <p className={styles.loginFormBottomText}>Your data will not be stored by Fembot</p>
+                    <p className={styles.loginFormBottomText}>Tus datos de sesión no serán almacenados en nuestro servidor</p>
                 </div>
             </div>
         </>

@@ -29,28 +29,28 @@ export default function ProfileStats({discordUser}) {
 
     return (
         <div className={styles.profileStats}>
-            <div className={styles.profileStat}>
+            <div className={styles.profileStat} onClick={manageSubs}>
                 <div className={styles.profileIcon + " " + styles.profileIconBlue}>
                     <i className="fas fa-heart"></i>
                 </div>
                 {subscription &&
-                    <div className={styles.profileValue} onClick={manageSubs}>{subscription}</div> ||
+                    <div className={styles.profileValue}>{subscription}</div> ||
                     <SubFieldSkeleton/>
                 }
                 <div className={styles.profileKey}>Subscriber</div>
             </div>
-            <div className={styles.profileStat}>
+            <div className={styles.profileStat} onClick={() => {
+                logout().then((completed: boolean) => {
+                    if (completed) {
+                        router.push("/");
+                    }
+                });
+            }}>
                 <div className={styles.profileIcon + " " + styles.profileIconPink}>
                     <i className="fa-solid fa-right-from-bracket"></i>
                 </div>
                 <div className={styles.profileValue} style={{
                     fontSize: "1.5rem"
-                }} onClick={() => {
-                    logout().then((completed: boolean) => {
-                        if (completed) {
-                            router.push("/");
-                        }
-                    });
                 }}>Cerrar sesión
                 </div>
             </div>

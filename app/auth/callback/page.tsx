@@ -15,7 +15,6 @@ export default function ExchangeToken() {
 
 
     useEffect(() => {
-        console.log(code)
         if (!code) {
             router.push("/auth/login")
         }
@@ -24,7 +23,7 @@ export default function ExchangeToken() {
             if (completed) {
                 router.push("/me")
             }
-        }).catch((err) => {
+        }).catch(() => {
             router.push("/auth/login")
         });
     }, [code])

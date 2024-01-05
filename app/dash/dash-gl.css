@@ -1,0 +1,49 @@
+.dashboardTopBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 6vh;
+    width: 100%;
+    background-color: var(--white);
+}
+
+.dashboardTopBar > a{
+    /* should cover the whole top bar height */
+    padding: 2vh 10px;
+    background-color: var(--black);
+    color: var(--white);
+    /* arrow shape */
+    border-radius: 0 50% 50% 0;
+    transition: color 0.3s ease-in-out;
+}
+.dashboardTopBar > a:hover{
+    background-color: var(--grey);
+    color: var(--black);
+}
+
+.dashboardTopBar > select {
+    margin: 11px 10px;
+    display: inline-block;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: var(--black);
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.dashboardTopBar > .separator {
+    display: inline-block;
+    color: var(--black);
+}
+
+.dash-layout{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--grey);
+}
