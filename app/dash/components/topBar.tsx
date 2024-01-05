@@ -3,7 +3,7 @@ import {Guild} from "./serverUtils";
 import React from 'react';
 import {useRouter} from "next/navigation";
 import {dispatchNotification} from "@/app/nfWidget";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {DashContext} from "./contextProviders";
 
 
@@ -11,6 +11,11 @@ export default function TopBar() {
 
     const router = useRouter();
     const guilds = useContext(DashContext);
+
+    useEffect(() => {
+        const selectElement = document.getElementById("guildSelect") as HTMLSelectElement;
+        selectElement.options[0].selected = true;
+    });
 
 
     const handleSelect = (evType: string, ev: React.ChangeEvent<HTMLSelectElement>) => {
@@ -35,8 +40,6 @@ export default function TopBar() {
                 break;
         }
     }
-
-
     return (
         <div className="dashboardTopBar">
             <a href="/" className="home-button"> <i className="fas fa-home"/> </a>
@@ -53,9 +56,11 @@ export default function TopBar() {
                 </option>
                 {
                     guilds.map((guild: Guild) => {
-                        return (
-                            <option value={guild.id}>{guild.name}</option>
-                        )
+                        if (guild.sunburstPresent) {
+                            return (
+                                <option value={guild.id}>{guild.name}</option>
+                            )
+                        }
                     })
                 }
             </select>

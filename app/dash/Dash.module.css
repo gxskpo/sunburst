@@ -1,6 +1,63 @@
 .guildContainer {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+    margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.guildPanel {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    border-radius: 5px;
+    padding: 10px;
+    max-width: 200px;
+    box-shadow: var(--small-default-shadow);
+    transition: all 0.2s ease-in-out;
+}
+
+.guildPanel:hover {
+    box-shadow: var(--sink-shadow);
+}
+
+.guildPanel > img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.guildPanel > h3 {
+    font-size: 1.2rem;
+    color: var(--black);
+    margin-bottom: 10px;
+    margin-top: 3px;
+}
+
+.guildPanel > button {
+    @apply mt-auto;
+    font-size: 1rem;
+    height: 35px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.manageServer {
+    /* flex end */
+    background-color: var(--discord-burple);
+    color: var(--black);
+    transition: all 0.2s ease-in-out;
+}
+
+.manageServer:hover {
+    box-shadow: var(--small-default-shadow);
+}
+
+.addToServer {
+    @apply mt-auto;
+    background-color: var(--discord-yellow);
+    color: var(--white);
+}
+
+.addToServer:hover {
+    box-shadow: var(--small-default-shadow);
 }
