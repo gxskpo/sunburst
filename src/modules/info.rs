@@ -12,8 +12,10 @@ pub async fn ping(ctx: Context<'_>) -> Result<(), Error> {
         .field("Shard", "<a:loading:1123453588136530043>", false)
         .field("Database", "N/A", false);
 
-    let message = ctx.send(CreateReply::default.embed(initial_embed)).await?;
-    let elapsed = now.elapsed()?;
+    let message = ctx
+        .send(CreateReply::default().embed(initial_embed))
+        .await?;
+    let elapsed = now().elapsed()?;
     let manager = ctx.framework().shard_manager();
     let runners = manager.runners.lock().await;
     let runner = match runners.get(&ctx.serenity_context().shard_id) {
