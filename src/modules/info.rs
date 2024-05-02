@@ -5,16 +5,14 @@ use std::time::SystemTime;
 
 #[poise::command(prefix_command, slash_command)]
 pub async fn ping(ctx: Context<'_>) -> Result<(), Error> {
-    let now = SystemTime::now();
+    let now = SystemTime::now;
     let initial_embed = CreateEmbed::default()
         .title("Latency")
         .field("API", "<a:loading:1123453588136530043>", false)
         .field("Shard", "<a:loading:1123453588136530043>", false)
         .field("Database", "N/A", false);
 
-    let message = ctx
-        .send(CreateReply::default().embed(initial_embed))
-        .await?;
+    let message = ctx.send(CreateReply::default.embed(initial_embed)).await?;
     let elapsed = now.elapsed()?;
     let manager = ctx.framework().shard_manager();
     let runners = manager.runners.lock().await;
@@ -25,19 +23,24 @@ pub async fn ping(ctx: Context<'_>) -> Result<(), Error> {
             return Ok(());
         }
     };
-
-    let latency = runner.latency;
-    let mut embed = CreateEmbed::default().title("Latency").field(
-        "API",
-        format!("`{:?}`ms", elapsed.as_millis()),
-        false,
-    );
-
-    if let Some(latency) = latency {
-        embed = embed.field("Shard", format!("`{:?}`ms", latency.as_millis()), false);
-    }
+    let embed = match runner.latency {
+        Some(latency) => CreateEmbed::default()
+            .title("Latency")
+            .field("API", format!("`{:?}ms`", elapsed.as_millis()), false)
+            .field("Gateway", format!("`{:?}ms`", latency.as_millis()), false),
+        None => {
+            // No se muy bien que podrias hacer pero esto es una opcion para no usar panic o return
+            CreateEmbed::default().title("Latency").field(
+                "API",
+                format!("`{:?}ms`", elapsed.as_millis()),
+                false,
+            )
+        }
+    };
 
     let reply = CreateReply::default().embed(embed);
     message.edit(ctx, reply).await?;
-    return Ok(());
+
+    // No hace falta el return, es explicito
+    Ok(())
 }
