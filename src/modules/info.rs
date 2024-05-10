@@ -1,5 +1,5 @@
 use crate::{Context, Error};
-use poise::serenity_prelude::{CreateEmbed, CreateEmbedAuthor, User};
+use poise::serenity_prelude::{CreateEmbed, CreateEmbedAuthor, Guild, Mentionable, User};
 use poise::CreateReply;
 use std::time::SystemTime;
 
@@ -18,12 +18,11 @@ pub async fn ping(ctx: Context<'_>) -> Result<(), Error> {
     let elapsed = now().elapsed()?;
     let manager = ctx.framework().shard_manager();
     let runners = manager.runners.lock().await;
-    let runner = match runners.get(&ctx.serenity_context().shard_id) {
-        Some(runner) => runner,
-        None => {
-            panic!("No shard found.") // This sholud never happen.
-        }
+
+    let Some(runner) = runners.get(&ctx.serenity_context().shard_id) else {
+        panic!("Shard don't found!");
     };
+
     let embed = match runner.latency {
         Some(latency) => CreateEmbed::default()
             .title("Latency")
@@ -54,23 +53,36 @@ pub async fn user(ctx: Context<'_>, user: Option<User>) -> Result<(), Error> {
     let user_info = format!(
         "
         **Bot**: `{}`
-        **Id**: `{}`
-    ",
+        **Id**:  `{}`
+        ",
         member.bot, member.id
     );
 
     let banner = match member.banner_url() {
         Some(banner) => banner,
-        None => String::from(""),
+        None => String::new(),
     };
 
-    let embed = CreateEmbed::default()
+    let mut embed = CreateEmbed::default()
         .description(format!("<@{}>", member.id))
         .thumbnail(&avatar)
         .author(CreateEmbedAuthor::new(&member.name).icon_url(&avatar))
         .image(banner)
         .field("Information", user_info, true);
 
+    if ctx.guild_id().is_some() {
+        let guild_id = ctx.guild_id().unwrap();
+
+        let guild = Guild::get(ctx.http(), guild_id).await?;
+        let m = guild.member(ctx.http(), member.id).await?;
+
+        let roles: Vec<String> = m.roles.iter().map(|&r| r.mention().to_string()).collect();
+        let detail = format!("**Roles**: `@everyone` {}", &roles.join(" "));
+
+        embed = embed.field("Guild", detail, false);
+    }
+
     ctx.send(CreateReply::default().embed(embed)).await?;
+
     Ok(())
 }
