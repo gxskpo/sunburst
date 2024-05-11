@@ -1,6 +1,7 @@
 use dotenv::dotenv;
 use poise::serenity_prelude as serenity;
 mod modules;
+mod utils;
 
 struct Data {}
 type Error = Box<dyn std::error::Error + Send + Sync>;

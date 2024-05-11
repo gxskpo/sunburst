@@ -1,10 +1,12 @@
-use crate::{Context, Error};
+use crate::utils;
+use crate::{Context, Data, Error};
 use poise::serenity_prelude::{CreateEmbed, CreateEmbedAuthor, Guild, Mentionable, User};
-use poise::CreateReply;
+use poise::{Command, CreateReply};
 use std::time::SystemTime;
 
+/// Get bot's latency
 #[poise::command(prefix_command, slash_command)]
-pub async fn ping(ctx: Context<'_>) -> Result<(), Error> {
+async fn ping(ctx: Context<'_>) -> Result<(), Error> {
     let now = SystemTime::now;
     let initial_embed = CreateEmbed::default()
         .title("Latency")
@@ -41,8 +43,12 @@ pub async fn ping(ctx: Context<'_>) -> Result<(), Error> {
     Ok(())
 }
 
+/// Get information about a member
 #[poise::command(prefix_command, slash_command)]
-pub async fn user(ctx: Context<'_>, user: Option<User>) -> Result<(), Error> {
+async fn user(
+    ctx: Context<'_>,
+    #[description = "User to get info about"] user: Option<User>,
+) -> Result<(), Error> {
     let member = user.as_ref().unwrap_or_else(|| ctx.author());
 
     let avatar = match member.avatar_url() {
@@ -58,31 +64,69 @@ pub async fn user(ctx: Context<'_>, user: Option<User>) -> Result<(), Error> {
         member.bot, member.id
     );
 
-    let banner = match member.banner_url() {
-        Some(banner) => banner,
-        None => String::new(),
-    };
+    let joined = format!(
+        "
+        **Discord**: <t:{}:R>
+        ",
+        member.created_at().unix_timestamp()
+    );
 
     let mut embed = CreateEmbed::default()
         .description(format!("<@{}>", member.id))
         .thumbnail(&avatar)
         .author(CreateEmbedAuthor::new(&member.name).icon_url(&avatar))
-        .image(banner)
-        .field("Information", user_info, true);
+        .field("Information", user_info, true)
+        .field("Joined", joined, true);
 
-    if ctx.guild_id().is_some() {
-        let guild_id = ctx.guild_id().unwrap();
-
+    if let Some(guild_id) = ctx.guild_id() {
         let guild = Guild::get(ctx.http(), guild_id).await?;
         let m = guild.member(ctx.http(), member.id).await?;
-
         let roles: Vec<String> = m.roles.iter().map(|&r| r.mention().to_string()).collect();
         let detail = format!("**Roles**: `@everyone` {}", &roles.join(" "));
-
         embed = embed.field("Guild", detail, false);
     }
 
     ctx.send(CreateReply::default().embed(embed)).await?;
 
     Ok(())
+}
+
+/// Get information about the server
+#[poise::command(prefix_command, slash_command)]
+async fn server(ctx: Context<'_>) -> Result<(), Error> {
+    assert!(ctx.guild_id().is_none(), "You are not in a guild");
+
+    let guild_id = ctx.guild_id().unwrap();
+    let guild = Guild::get(ctx.http(), guild_id).await?;
+
+    let created_at = utils::time::snowflake(guild_id.into());
+
+    let guild_icon = guild.icon_url().unwrap_or("".to_owned());
+
+    let information = format!(
+        "
+        Created: {}
+        Id: `{}`
+        Owner: <@{}>
+        Shard: {}
+        Nitro Tier: {:?}
+       ",
+        created_at,
+        guild_id,
+        guild.owner_id,
+        guild.shard_id(ctx.cache()),
+        guild.premium_tier
+    );
+
+    let embed = CreateEmbed::default()
+        .author(CreateEmbedAuthor::new(guild.name).icon_url(guild_icon))
+        .field("Information", information, true);
+
+    ctx.send(CreateReply::default().embed(embed)).await?;
+
+    Ok(())
+}
+
+pub fn commands() -> Vec<Command<Data, Error>> {
+    vec![ping(), user(), server()]
 }
