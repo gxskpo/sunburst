@@ -1,6 +1,6 @@
 use crate::utils;
 use crate::{Context, Data, Error};
-use poise::serenity_prelude::{CreateEmbed, CreateEmbedAuthor, Guild, Mentionable, User};
+use poise::serenity_prelude::{CreateEmbed, CreateEmbedAuthor, Guild, Http, Mentionable, User};
 use poise::{Command, CreateReply};
 use std::time::SystemTime;
 
@@ -94,14 +94,17 @@ async fn user(
 /// Get information about the server
 #[poise::command(prefix_command, slash_command)]
 async fn server(ctx: Context<'_>) -> Result<(), Error> {
-    assert!(ctx.guild_id().is_none(), "You are not in a guild");
+    let Some(guild_id) = ctx.guild_id() else {
+        panic!("You are not in a guild");
+    };
 
-    let guild_id = ctx.guild_id().unwrap();
-    let guild = Guild::get(ctx.http(), guild_id).await?;
+    let guild = Http::get_guild_with_counts(ctx.http(), guild_id).await?;
 
     let created_at = utils::time::snowflake(guild_id.into());
 
-    let guild_icon = guild.icon_url().unwrap_or("".to_owned());
+    let guild_icon = guild
+        .icon_url()
+        .unwrap_or("https://hwrk.lol/sunburst/assets/default-icon.jpg".to_owned());
 
     let information = format!(
         "
@@ -118,9 +121,23 @@ async fn server(ctx: Context<'_>) -> Result<(), Error> {
         guild.premium_tier
     );
 
+    let count = format!(
+        "
+```py\n
+Boosts: {}
+Members: {}
+Presences: {}
+```
+        ",
+        guild.premium_subscription_count.unwrap(),
+        guild.approximate_member_count.unwrap(),
+        guild.approximate_presence_count.unwrap()
+    );
+
     let embed = CreateEmbed::default()
         .author(CreateEmbedAuthor::new(guild.name).icon_url(guild_icon))
-        .field("Information", information, true);
+        .field("Information", information, true)
+        .field("Counts", count, true);
 
     ctx.send(CreateReply::default().embed(embed)).await?;
 
