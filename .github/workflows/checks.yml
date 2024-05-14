@@ -1,0 +1,51 @@
+name: Check Format and Code Quality
+on:
+  workflow_dispatch:
+  workflow_call:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+    paths:
+      - "src/**/**.rs"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  check-fmt:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: checks
+        run: |
+          cargo fmt --all --check
+
+  check-clippy:
+    needs: [check-fmt]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: cargo check
+        run: cargo clippy --verbose -- -D clippy::pedantic -D warnings
+
+  check-tests:
+    needs: [check-clippy]
+    # Not run, is not necesary for now
+    if: false
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: cargo check
+        run: |
+          cargo test
