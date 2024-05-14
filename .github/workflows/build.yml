@@ -1,0 +1,38 @@
+name: Build and Deploy
+permissions:
+  contents: write
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "*"
+    paths:
+      - "src/**/**.rs"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  ci:
+    uses: ./.github/workflows/checks.yml
+
+  build:
+    runs-on: ubuntu-22.04
+    needs: [ ci ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Build
+        run: cargo build --release
+      - uses: actions/upload-artifact@v4
+        with:
+          path: target/release/sunburst
+
+  deploy:
+    runs-on: ubuntu-22.04
+    needs: [ build ]
+    steps:
+      - uses: actions/download-artifact@v4
+      # Upload binary
