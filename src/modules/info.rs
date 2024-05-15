@@ -100,7 +100,7 @@ async fn server(ctx: Context<'_>) -> Result<(), Error> {
 
     let guild = Http::get_guild_with_counts(ctx.http(), guild_id).await?;
 
-    let created_at = utils::time::snowflake(guild_id.into());
+    let created_at = utils::snowflake::time(guild_id.into());
 
     let guild_icon = guild
         .icon_url()
@@ -108,7 +108,7 @@ async fn server(ctx: Context<'_>) -> Result<(), Error> {
 
     let information = format!(
         "
-        Created: {}
+        Created: <t:{}:R>
         Id: `{}`
         Owner: <@{}>
         Shard: {}
@@ -127,17 +127,20 @@ async fn server(ctx: Context<'_>) -> Result<(), Error> {
 Boosts: {}
 Members: {}
 Presences: {}
+Roles: {}
 ```
         ",
         guild.premium_subscription_count.unwrap(),
         guild.approximate_member_count.unwrap(),
-        guild.approximate_presence_count.unwrap()
+        guild.approximate_presence_count.unwrap(),
+        guild.roles.len()
     );
 
     let embed = CreateEmbed::default()
-        .author(CreateEmbedAuthor::new(guild.name).icon_url(guild_icon))
+        .author(CreateEmbedAuthor::new(guild.name).icon_url(&guild_icon))
         .field("Information", information, true)
-        .field("Counts", count, true);
+        .field("Counts", count, true)
+        .image(&guild_icon);
 
     ctx.send(CreateReply::default().embed(embed)).await?;
 

@@ -1,7 +1,9 @@
 use dotenv::dotenv;
-use poise::serenity_prelude as serenity;
+use poise::serenity_prelude::{ClientBuilder, GatewayIntents};
 mod modules;
 mod utils;
+
+use crate::modules::{errors, events, get_commands};
 
 struct Data {}
 type Error = Box<dyn std::error::Error + Send + Sync>;
@@ -11,14 +13,16 @@ type Context<'a> = poise::Context<'a, Data, Error>;
 async fn main() {
     dotenv().ok();
     let token = std::env::var("DISCORD_TOKEN").expect("missing DISCORD_TOKEN");
-    let intents = serenity::GatewayIntents::all();
+    let intents = GatewayIntents::all();
     let framework = poise::Framework::builder()
         .options(poise::FrameworkOptions {
+            on_error: |e| Box::pin(errors::handle(e)),
+            event_handler: |_ctx, event, _framework, _data| Box::pin(events::handler(event)),
             prefix_options: poise::PrefixFrameworkOptions {
                 prefix: Some("$".into()),
                 ..Default::default()
             },
-            commands: modules::get_commands(),
+            commands: get_commands(),
             ..Default::default()
         })
         .setup(|ctx, _ready, framework| {
@@ -29,7 +33,7 @@ async fn main() {
         })
         .build();
 
-    let client = serenity::ClientBuilder::new(token, intents)
+    let client = ClientBuilder::new(token, intents)
         .framework(framework)
         .await;
     client.unwrap().start().await.unwrap();
