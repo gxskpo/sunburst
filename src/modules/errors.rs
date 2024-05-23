@@ -23,7 +23,19 @@ pub async fn handle(e: FrameworkError<'_, Data, Error>) {
             let _ = ctx.send(reply).await;
         }
         FrameworkError::SubcommandRequired { ctx } => {
-            let _ = ctx.say("requiere subcomando").await;
+            let embed = CreateEmbed::default()
+                .title("Oops!")
+                .description("This commands need to be executed with a subcommand");
+
+            let reply = CreateReply::default().embed(embed);
+            let _ = ctx.send(reply).await;
+        }
+        FrameworkError::GuildOnly { ctx, .. } => {
+            let embed = CreateEmbed::default()
+                .title("Oops")
+                .description("You need to be in a guild to use this command.");
+            let reply = CreateReply::default().embed(embed);
+            let _ = ctx.send(reply).await;
         }
         _ => (),
     }

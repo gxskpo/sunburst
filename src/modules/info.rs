@@ -17,7 +17,6 @@ async fn ping(ctx: Context<'_>) -> Result<(), Error> {
     let message = ctx
         .send(CreateReply::default().embed(initial_embed))
         .await?;
-    let elapsed = now().elapsed()?;
     let manager = ctx.framework().shard_manager();
     let runners = manager.runners.lock().await;
 
@@ -25,6 +24,7 @@ async fn ping(ctx: Context<'_>) -> Result<(), Error> {
         panic!("Shard don't found!");
     };
 
+    let elapsed = now().elapsed()?;
     let embed = match runner.latency {
         Some(latency) => CreateEmbed::default()
             .title("Latency")
@@ -36,7 +36,6 @@ async fn ping(ctx: Context<'_>) -> Result<(), Error> {
             false,
         ),
     };
-
     let reply = CreateReply::default().embed(embed);
     message.edit(ctx, reply).await?;
 
