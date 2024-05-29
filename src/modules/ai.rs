@@ -21,7 +21,7 @@ pub async fn ask(
         },
         ChatCompletionMessage {
             role: ChatCompletionMessageRole::User,
-            content: Some(message.to_owned()),
+            content: Some(message.clone()),
             name: Some("Manolo".to_owned()),
             function_call: None,
         },
