@@ -69,8 +69,6 @@ async fn mute(
     let guild = Guild::get(ctx.http(), guild_id).await?;
 
     let Ok(time) = parse::human_time(&duration) else {
-        // TODO: Add custom error.
-        // panic!("AAAAA")
         return Err(Box::new(SunburstError::ArgumentError));
     };
 

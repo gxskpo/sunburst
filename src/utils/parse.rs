@@ -13,7 +13,7 @@ pub fn human_time(human: &str) -> Result<Timestamp, Box<dyn error::Error>> {
         let time = (SystemTime::now() + x)
             .duration_since(SystemTime::UNIX_EPOCH)?
             .as_secs();
-        return Ok(Timestamp::from_unix_timestamp(time as i64)?);
+        return Ok(Timestamp::from_unix_timestamp(i64::try_from(time)?)?);
     };
 
     let days: u32 = caps
@@ -34,5 +34,5 @@ pub fn human_time(human: &str) -> Result<Timestamp, Box<dyn error::Error>> {
         .duration_since(SystemTime::UNIX_EPOCH)?
         .as_secs();
 
-    Ok(Timestamp::from_unix_timestamp(time as i64)?)
+    Ok(Timestamp::from_unix_timestamp(i64::try_from(time)?)?)
 }

@@ -2,6 +2,8 @@ use dotenv::dotenv;
 use poise::serenity_prelude::{ClientBuilder, GatewayIntents};
 mod modules;
 mod utils;
+use openai::set_key;
+use std::env;
 
 use crate::modules::{errors, events, get_commands};
 
@@ -12,7 +14,9 @@ type Context<'a> = poise::Context<'a, Data, Error>;
 #[tokio::main]
 async fn main() {
     dotenv().ok();
-    let token = std::env::var("DISCORD_TOKEN").expect("missing DISCORD_TOKEN");
+
+    set_key(env::var("OPENAI_KEY").expect("missing OPENAI_KEY"));
+    let token = env::var("DISCORD_TOKEN").expect("missing DISCORD_TOKEN");
     let intents = GatewayIntents::all();
     let framework = poise::Framework::builder()
         .options(poise::FrameworkOptions {
