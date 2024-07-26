@@ -5,6 +5,7 @@ mod utils;
 use openai::set_key;
 use std::env;
 
+#[allow(unused_imports)]
 use crate::modules::{errors, events, get_commands};
 
 struct Data {}
@@ -14,7 +15,6 @@ type Context<'a> = poise::Context<'a, Data, Error>;
 #[tokio::main]
 async fn main() {
     dotenv().ok();
-
     set_key(env::var("OPENAI_KEY").expect("missing OPENAI_KEY"));
     let token = env::var("DISCORD_TOKEN").expect("missing DISCORD_TOKEN");
     let intents = GatewayIntents::all();

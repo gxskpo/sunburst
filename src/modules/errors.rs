@@ -3,7 +3,10 @@ use poise::serenity_prelude::CreateEmbed;
 use poise::structs::FrameworkError;
 use poise::CreateReply;
 
+#[allow(dead_code)]
 pub async fn handle(e: FrameworkError<'_, Data, Error>) {
+    let mut embed = CreateEmbed::default().title("Oops!");
+
     match e {
         FrameworkError::MissingUserPermissions {
             missing_permissions,
@@ -17,26 +20,20 @@ pub async fn handle(e: FrameworkError<'_, Data, Error>) {
                     .get_permission_names()
                     .join(", ")
             );
-            let embed = CreateEmbed::default().title("Oops!")
-                .description(format!("You don't have enough permissions to use this command, missing permissions: ```{text}```"));
+            embed = embed.description(format!("You don't have enough permissions to use this command, missing permissions: ```{text}```"));
             let reply = CreateReply::default().embed(embed);
             let _ = ctx.send(reply).await;
         }
         FrameworkError::SubcommandRequired { ctx } => {
-            let embed = CreateEmbed::default()
-                .title("Oops!")
-                .description("This commands need to be executed with a subcommand");
-
+            embed = embed.description("This commands need to be executed with a subcommand");
             let reply = CreateReply::default().embed(embed);
             let _ = ctx.send(reply).await;
         }
         FrameworkError::GuildOnly { ctx, .. } => {
-            let embed = CreateEmbed::default()
-                .title("Oops")
-                .description("You need to be in a guild to use this command.");
+            embed = embed.description("You need to be in a guild to use this command.");
             let reply = CreateReply::default().embed(embed);
             let _ = ctx.send(reply).await;
         }
-        _ => (),
+        _ => panic!("{e}:?"),
     }
 }

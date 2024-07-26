@@ -16,16 +16,22 @@ async fn ban(
     #[description = "User to ban"] user: User,
     #[description = "Reason"] reason: Option<String>,
 ) -> Result<(), Error> {
-    let guild_id = ctx.guild_id().unwrap();
+    let Some(guild_id) = ctx.guild_id() else {
+        return Err(Box::new(SunburstError::NotInGuild));
+    };
+
     let guild = Guild::get(ctx.http(), guild_id).await?;
-    let r = format!(
-        "Banned by {} | Reason:{}",
-        ctx.author().name,
-        reason.unwrap_or("Not specified".to_owned())
-    );
+
+    let reason = reason.unwrap_or("Not specified.".to_owned());
+
+    let r = format!("Banned by {} | Reason:{}", ctx.author().name, reason);
+
     guild.ban_with_reason(ctx.http(), user, 7, r).await?;
-    let embed = CreateEmbed::default().title("Baneado");
+
+    let embed = CreateEmbed::default().title("Banned");
+
     let reply = CreateReply::default().embed(embed);
+
     ctx.send(reply).await?;
 
     Ok(())
@@ -69,7 +75,7 @@ async fn mute(
     let guild = Guild::get(ctx.http(), guild_id).await?;
 
     let Ok(time) = parse::human_time(&duration) else {
-        return Err(Box::new(SunburstError::ArgumentError));
+        return Err(Box::new(SunburstError::Arguments));
     };
 
     let mut m = guild.member(ctx.http(), member.user.id).await?;

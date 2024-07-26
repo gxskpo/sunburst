@@ -15,7 +15,6 @@ pub fn human_time(human: &str) -> Result<Timestamp, Box<dyn error::Error>> {
             .as_secs();
         return Ok(Timestamp::from_unix_timestamp(i64::try_from(time)?)?);
     };
-
     let days: u32 = caps
         .get(1)
         .map_or(0, |m| m.as_str().parse().unwrap_or_default());
