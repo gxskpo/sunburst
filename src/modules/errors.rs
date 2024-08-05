@@ -34,6 +34,6 @@ pub async fn handle(e: FrameworkError<'_, Data, Error>) {
             let reply = CreateReply::default().embed(embed);
             let _ = ctx.send(reply).await;
         }
-        _ => panic!("{e:?}"),
+        _ => panic!("{e}"),
     }
 }
